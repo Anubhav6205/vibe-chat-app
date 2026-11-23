@@ -1,43 +1,63 @@
-Vibe Chat App
-Vibe is a modern and feature-rich chat application that allows users to connect with their loved ones in real-time. With an intuitive user interface and powerful features, Vibe provides an immersive chat experience.
+# Vibe
 
-Have a look =>  
+A real-time chat app built with React, Node.js, Express, MongoDB and Socket.io. Users sign in with Google, find other users, exchange messages instantly and share files.
 
-https://github.com/Anubhav6205/Vibe/assets/82750157/b2c1b783-6028-4df5-b71e-e10d15ac263e
+[Demo video](https://github.com/Anubhav6205/Vibe/assets/82750157/b2c1b783-6028-4df5-b71e-e10d15ac263e)
 
+**Status:** finished prototype (2023).
 
-Features:-
-User-friendly interface with top-notch UI design.
-Real-time chat functionality for instant communication.
-File sharing capabilities (photos, PDFs, videos) for easy exchange of media.
-Personalized about section to showcase individual profiles.
+## Features
 
-Tech Stack:-
+- One-to-one conversations with instant delivery over WebSockets
+- Google sign-in
+- File sharing (images, PDFs, videos), stored in MongoDB GridFS
+- Profile drawer with an editable "about" section
+- User search
 
-Frontend:-
-React JS: JavaScript library for building interactive user interfaces
-Material UI: UI component library for modern and visually appealing designs
+## Tech stack
 
-Backend:-
-Node.js: JavaScript runtime environment for server-side development
-Express.js: Web application framework for building robust APIs
-MongoDB: NoSQL database for efficient data storage
-Socket.io: Real-time communication library for instant messaging and updates
+| Layer | Tools |
+|---|---|
+| Client | React 18, Vite, Material UI, Socket.io client, `@react-oauth/google` |
+| Server | Node.js, Express, Socket.io, Mongoose, multer with GridFS storage |
+| Database | MongoDB |
 
+## Project structure
 
-Installation:
-Clone the repository
-Install dependencies: npm install (run this command in both the client and server folders).
-Start the client: npm run dev (navigate to localhost:5173 in your browser).
-Start the server: npm run dev (backend will run on the appropriate port).
+```
+client/   React app (components for chats, menu, profile drawer, login)
+server/   Express API, Socket.io handlers, controllers, Mongoose models
+```
 
+## Run locally
 
-Contributing:-
-Contributions to Vibe are welcome! Feel free to fork the repository and submit pull requests for new features or bug fixes.
+Requirements: Node.js 18 or later, a running MongoDB, and a Google OAuth client ID (set in `client/src/constants/data.jsx`).
 
+```bash
+# Server (listens on port 8000)
+cd server
+cp .env.example .env      # set URI to your MongoDB connection string
+npm install
+npm run dev
 
+# Client (in a second terminal)
+cd client
+npm install
+npm run dev               # http://localhost:5173
+```
 
-Contact:
-For any questions or feedback, please reach out at anubhavgupta6205@gmail.com
+The client expects the API at `http://localhost:8000`. These steps are written from the code and have not been re-verified on a clean machine.
 
-Enjoy chatting with Vibe!
+## Limitations
+
+- One-to-one chat only, no group conversations.
+- The API URL and port are hard-coded.
+- No automated tests.
+
+## License
+
+MIT, see [LICENSE](LICENSE).
+
+## Contact
+
+Anubhav Gupta, [LinkedIn](https://www.linkedin.com/in/anubhav-gupta-92410a244/)
