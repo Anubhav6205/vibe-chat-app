@@ -131,12 +131,12 @@ export default function NoChat() {
   return (
     <NoChatContainer>
       <TitleContainer>
-        <VibeImage src="../../public/vibe.png" alt="Vibe" />
+        <VibeImage src="/Vibe.png" alt="Vibe" />
         <Title>Vibe</Title>
       </TitleContainer>
       <ArmContainer>
-        <ImageArm src="../../arm.png" alt="Arm" />
-        <ImageHulk src="../../arm2.png" alt="Hulk" />
+        <ImageArm src="/arm.png" alt="Arm" />
+        <ImageHulk src="/arm2.png" alt="Hulk" />
       </ArmContainer>
       <AnnotationContainer>
         <TextContainer>

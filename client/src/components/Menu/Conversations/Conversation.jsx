@@ -83,7 +83,7 @@ export default function Conversation({ user }) {
       <UserInfoContainer>
         <UserName>{user.name}</UserName>
         <LatestMessage>
-          {latestMessage?.text?.includes("localhost")
+          {(latestMessage?.text?.includes("localhost") || latestMessage?.text?.startsWith("blob:"))
             ? "Media File"
             : latestMessage?.text}
         </LatestMessage>

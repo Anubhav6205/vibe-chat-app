@@ -1,6 +1,8 @@
 import { createContext, useEffect, useRef, useState } from "react";
 import { PropTypes } from "prop-types";
 import { io } from 'socket.io-client';
+import { API_URL, DEMO_MODE } from '../config';
+import { createDemoSocket } from '../demo/demoSocket';
 
 export const AccountContext = createContext("");
 
@@ -13,7 +15,9 @@ const AccountProvider = ({ children }) => {
   const socket = useRef();
 
   useEffect(() => {
-    socket.current = io('ws://localhost:8000');
+    socket.current = DEMO_MODE
+      ? createDemoSocket()
+      : io(API_URL.replace(/^http/, 'ws'));
   }, []);
 
   return (

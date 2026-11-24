@@ -6,6 +6,8 @@ import { useContext } from "react";
 import { AccountContext } from "../../context/AccountProvider";
 import styled from "@emotion/styled";
 import { addUser } from "../../api/api";
+import { DEMO_MODE } from "../../config";
+import { DEMO_ACCOUNT } from "../../demo/demoBackend";
 
 // Define a custom theme with purple button color
 const theme = createTheme({
@@ -28,6 +30,8 @@ export default function LoginBox() {
     await addUser(decoded);
   };
 
+  const startDemo = () => setAccount(DEMO_ACCOUNT);
+
   const handleError = (res) => {
     console.log(res);
     // console.log("Error");
@@ -44,6 +48,22 @@ export default function LoginBox() {
           <AppTitle variant="h4" align="center" mb={4}>
             Vibe
           </AppTitle>
+          {DEMO_MODE ? (
+            <Grid container spacing={2} alignItems="center">
+              <Grid item xs={12}>
+                <Typography variant="body2" align="center">
+                  This is an offline demo. There is no server, so Google sign-in is
+                  turned off. You will chat with scripted bot contacts, and
+                  messages stay in this browser tab.
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Button variant="contained" color="primary" fullWidth onClick={startDemo}>
+                  Enter demo
+                </Button>
+              </Grid>
+            </Grid>
+          ) : (
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12}>
               <TextField
@@ -99,8 +119,9 @@ export default function LoginBox() {
               </Box>
             </Grid>
           </Grid>
+          )}
           <Box mt={4} textAlign="center">
-            <img src="../../../../public/qr-code.png" alt="QR Code" style={{ height: "10rem" }} />
+            <img src="/qr-code.png" alt="QR Code" style={{ height: "10rem" }} />
             <Typography variant="body2" mt={2}>
               Scan to open my Github profile
             </Typography>

@@ -1,7 +1,9 @@
 import axios from "axios";
+import { API_URL as url, DEMO_MODE } from "../config";
+import { demoApi } from "../demo/demoBackend";
 
 export const addUser = async (data) => {
-  const url = "http://localhost:8000";
+  if (DEMO_MODE) return demoApi.addUser(data);
   try {
     await axios.post(`${url}/addUser`, data);
   } catch (error) {
@@ -10,10 +12,9 @@ export const addUser = async (data) => {
 };
 
 export const getUser = async () => {
-  const url = "http://localhost:8000";
+  if (DEMO_MODE) return demoApi.getUser();
   try {
     let users = await axios.get(`${url}/getUser`);
-  //  console.log(users);
     return users.data;
   } catch (error) {
     console.log(`Error while fetching user:${error}`);
@@ -21,94 +22,66 @@ export const getUser = async () => {
 };
 
 export const setConversation = async (data) => {
-  const url = "http://localhost:8000";
+  if (DEMO_MODE) return demoApi.setConversation(data);
   try {
     await axios.post(`${url}/conversation/add`, data);
-   // console.log(`Conversation set successfully`);
   } catch (error) {
     console.log(`Error in setting conversation :${error}`);
   }
 };
 
 export const getConversation = async (data) => {
-  const url = "http://localhost:8000";
+  if (DEMO_MODE) return demoApi.getConversation(data);
   try {
-    const response=await axios.post(`${url}/conversation/get`,data);
-  //  console.log(`Conversation fetched successfully in api.jsx`);
+    const response = await axios.post(`${url}/conversation/get`, data);
     return response.data;
   } catch (error) {
     console.log(`Error in getting conversation :${error}`);
   }
 };
 
-
-export const newMessage=async(data)=>{
-  const url = "http://localhost:8000";
-  try{
-    const response=await axios.post(`${url}/message/add`,data);
-    // console.log(`Message sent successfully in api.jsx`);
+export const newMessage = async (data) => {
+  if (DEMO_MODE) return demoApi.newMessage(data);
+  try {
+    const response = await axios.post(`${url}/message/add`, data);
     return response.data;
-
-
-  }
-  catch(error)
-  {
+  } catch (error) {
     console.log(`Error in sending message :${error}`);
   }
-  
-}
+};
 
-export const getMessages=async(id)=>{
-  const url = "http://localhost:8000";
-  try{
-
+export const getMessages = async (id) => {
+  if (DEMO_MODE) return demoApi.getMessages(id);
+  try {
     //id is the params
-    let response=await axios.get(`${url}/messages/get/${id}`);
-    // console.log(`Messages fetched successfully in api.jsx`);
+    let response = await axios.get(`${url}/messages/get/${id}`);
     return response.data;
-
+  } catch (error) {
+    console.log(`Error in getting message:${error}`);
   }
-  catch(error)
-  {
-   
-    console.log(`Error in getting message:${error}`)
-  }
-  
-}
+};
 
-
-export const uploadFile=async(data)=>{
-  const url = "http://localhost:8000";
-  try{
-    return await axios.post(`${url}/file/upload`,data);
-    
-  }catch(error)
-  {
+export const uploadFile = async (data) => {
+  if (DEMO_MODE) return demoApi.uploadFile(data);
+  try {
+    return await axios.post(`${url}/file/upload`, data);
+  } catch (error) {
     console.log(`Error in uploading file:${error}`);
   }
+};
 
-  
-}
-
-
-
-export const addAboutUser=async(data)=>{
-  const url = "http://localhost:8000";
-  try{
-    await axios.post(`${url}/aboutUser/add`,data);
+export const addAboutUser = async (data) => {
+  if (DEMO_MODE) return demoApi.addAboutUser(data);
+  try {
+    await axios.post(`${url}/aboutUser/add`, data);
     console.log(`About set successfully in api.jsx`);
-
-  }
-  catch(error){
+  } catch (error) {
     console.log(`Error in setting about:${error}`);
   }
-  
-
-}
-
+};
 
 export const getAboutUser = async (sub) => {
-  const url = "http://localhost:8000";
+  if (DEMO_MODE) return demoApi.getAboutUser(sub);
   try {
     const response = await axios.get(`${url}/aboutUser/get`, {
       params: { sub: sub },
